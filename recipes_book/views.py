@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Recipe
 # Create your views here.
 def add_recipe(request):
-    print(request)
+    print(request.POST)
     if request.method == 'POST':
         name = request.POST.get('name')
         description = request.POST.get('description')
@@ -14,4 +14,12 @@ def add_recipe(request):
         }
         Recipe.objects.create(**data)
         return redirect('recipe')
-    return render(request,'recipe.html')
+    payload = Recipe.objects.all()
+    return render(request,'recipe.html',context={"payload":payload})
+
+def delete(request,id):
+    print(request.POST)
+    data = Recipe.objects.get(id=id)
+    data.delete()
+    print(data)
+    return redirect('recipe')

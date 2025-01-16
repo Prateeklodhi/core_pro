@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 # Create your models here.
 class Recipe(models.Model):
     name = models.CharField(max_length=200,verbose_name='Recipe Of')
@@ -10,5 +10,10 @@ class Recipe(models.Model):
     def __str__(self):
         return self.name
     
+    # def delete(self, *args, **kwargs):
+    #     if self.image and os.path.isfile(self.image.path):
+    #         os.remove(self.image.path)
+    #     super().delete(*args,**kwargs)
+        
     class Meta:
         ordering = ['-created']

@@ -19,5 +19,30 @@
         </div>
         <button type="submit" class="btn btn-success">Add Recipe</button>
     </form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in payload %}
+            <tr>
+                <th scope="row">{{item.id}}</th>
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td> <img src="/media/{{item.image}}" alt="{{item.name}}" style="width: 200px;" srcset=""></td>
+                <form method="post">
+                    {% csrf_token %}
+                    <td> <a href="delete/{{item.id}}" type="submit" class="btn btn-danger">Delete</a></td>
+                </form>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
+
 {% endblock content %}
