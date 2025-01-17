@@ -19,13 +19,20 @@
         </div>
         <button type="submit" class="btn btn-success">Add Recipe</button>
     </form>
+    <form method="get" class="col-6 mx-auto card p-3 shadow-lg">
+        <div class="mb=3">
+            <input type="text" placeholder="search" class="form-control" name="search">
+            <br>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
     <table class="table">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Image</th>
             </tr>
         </thead>
         <tbody>
@@ -35,10 +42,8 @@
                 <td>{{item.name}}</td>
                 <td>{{item.description}}</td>
                 <td> <img src="/media/{{item.image}}" alt="{{item.name}}" style="width: 200px;" srcset=""></td>
-                <form method="post">
-                    {% csrf_token %}
-                    <td> <a href="delete/{{item.id}}" type="submit" class="btn btn-danger">Delete</a></td>
-                </form>
+                <td> <a href="delete/{{item.id}}" type="submit" class="btn btn-danger">Delete</a></td>
+                <td> <a href="update/{{item.id}}" class="btn btn-primary">Update</a></td>
             </tr>
             {% endfor %}
         </tbody>

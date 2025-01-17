@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipe/',views.add_recipe,name='recipe'),
+    path('recipe/update/<id>',views.update,name='update'),
     path('recipe/delete/<id>',views.delete,name='delete')
 ]
 

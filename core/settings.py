@@ -27,7 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+import os
+from logging.handlers import RotatingFileHandler
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +45,44 @@ EXTERNAL_APPS = [
     "home.apps.HomeConfig",
     "recipes_book.apps.RecipesBookConfig"
 ]
+
+#Logger 
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+        'simple': {
+            'format': '[%(levelname)s] %(message)s'
+        },
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',  # Log all levels from DEBUG and above
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs/app.log'),  # Log file location
+            'maxBytes': 5 * 1024 * 1024,
+            'backupCount':3,
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'INFO',  # Log INFO and above to console
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'recipe_book': {  # Custom logger for your app
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
 
 INSTALLED_APPS += EXTERNAL_APPS
 
